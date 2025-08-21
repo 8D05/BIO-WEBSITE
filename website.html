@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Reproduction Guide</title>
+    <style>
+        :root {
+            --bg: #f8fdf8;
+            --card: #ffffff;
+            --ink: #1f2937;
+            --muted: #6b7280;
+            --accent: #dc2626;
+            --accent-2: #059669;
+            --accent-3: #d97706;
+            --ring: #10b981;
+            --primary: #065f46;
+            --primary-light: #ecfdf5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 900px) {
+            .compare {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .pill.red {
+            background: rgba(225, 29, 72, 0.12);
+            color: var(--accent);
+        }
+
+        .pill.green {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--accent-2);
+        }
+
+        ul.list {
+            padding-left: 18px;
+            margin: 10px 0;
+        }
+
+        ul.list li {
+            margin: 6px 0;
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 900px) {
+            .flow {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .step {
+            position: relative;
+            padding: 18px;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid rgba(2, 6, 23, 0.08);
+        }
+
+        .step:before {
+            content: attr(data-step);
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            background: var(--bg);
+            border: 1px solid rgba(2, 6, 23, 0.09);
+            border-radius: 10px;
+            padding: 4px 9px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 8px 0 0;
+        }
+
+        .legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        .dot.red {
+            background: var(--accent);
+        }
+
+        .dot.green {
+            background: var(--accent-2);
+        }
+
+        .callout {
+            border-left: 4px solid var(--accent-3);
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: linear-gradient(0deg, rgba(251, 191, 36, 0.12), transparent), var(--card);
+            margin: 20px 0;
+        }
+
+        .sources {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding: 18px;
+            border-top: 1px dashed rgba(2, 6, 23, 0.12);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--ink);
+            color: white;
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn:focus {
+            outline: 3px solid var(--ring);
+            outline-offset: 2px;
+        }
+
+        .pop {
+            animation: pop 0.7s ease both;
+        }
+
+        @keyframes pop {
+            from {
+                transform: translateY(8px) scale(0.98);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .btn {
+                display: none !important;
+            }
+            .step {
+                box-shadow: none;
+            }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(2, 6, 23, 0.08);
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            color: var(--ink);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .reproduction-type {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(6, 95, 70, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .reproduction-type h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .benefit-risk {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        @media (min-width: 768px) {
+            .benefit-risk {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .benefit, .risk {
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .benefit {
+            background: rgba(5, 150, 105, 0.05);
+            border-left-color: var(--accent-2);
+        }
+
+        .risk {
+            background: rgba(220, 38, 38, 0.05);
+            border-left-color: var(--accent);
+        }
+
+        .highlight {
+            background: var(--primary-light);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 16px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Plant Reproduction Guide</h1>
+        
+        <div class="callout pop">
+            <strong>Learning Objective:</strong> Understanding how plants reproduce and the advantages of different reproductive strategies.
+        </div>
+
+        <div class="section">
+            <h2>Strawberry Reproduction Methods</h2>
+            
+            <div class="comparison-grid">
+                <div class="reproduction-type">
+                    <h4><span class="pill green">Asexual</span> Reproduction</h4>
+                    <p><strong>Method:</strong> Strawberries create new plants using runners called <em>stolons</em>. These are long stems that grow along the ground, and when they touch the soil, they can grow roots and form a new strawberry plant.</p>
+                    <ul class="list">
+                        <li>Makes an exact copy of the parent plant</li>
+                        <li>Faster reproduction process</li>
+                        <li>Preferred by farmers for consistency</li>
+                        <li>Preserves successful genetic combinations</li>
+                    </ul>
+                </div>
+                
+                <div class="reproduction-type">
+                    <h4><span class="pill red">Sexual</span> Reproduction</h4>
+                    <p><strong>Method:</strong> Strawberries use flowers with male and female parts. When pollination happens, seeds are formed inside the fruit, mixing genes from two plants.</p>
+                    <ul class="list">
+                        <li>Creates genetic variation</li>
+                        <li>Helps plants adapt to changing environments</li>
+                        <li>Slower and less reliable process</li>
+                        <li>New plants differ from parents</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Monoculture: Benefits and Risks</h2>
+            
+            <div class="highlight">
+                <p><strong>Definition:</strong> Monoculture eliminates genetic variability by promoting uniform crops.</p>
+            </div>
+
+            <div class="benefit-risk">
+                <div class="benefit">
+                    <h4>Benefits</h4>
+                    <ul class="list">
+                        <li>Efficient for farming operations</li>
+                        <li>Uniform crop characteristics</li>
+                        <li>Easier cultivation and harvesting</li>
+                        <li>Predictable yields</li>
+                    </ul>
+                </div>
+                
+                <div class="risk">
+                    <h4>Risks</h4>
+                    <ul class="list">
+                        <li>Increased vulnerability to pests</li>
+                        <li>Higher disease susceptibility</li>
+                        <li>Lack of genetic diversity</li>
+                        <li>Potential for widespread crop failure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <strong>Historical Example:</strong> European farmers' reliance on one type of potato led to the Irish Potato Famine when disease struck. This demonstrates how genetic uniformity can make crops highly vulnerable.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Plant Development Overview</h2>
+            
+            <div class="flow">
+                <div class="step pop" data-step="1">
+                    <h4>Continuous Growth</h4>
+                    <p>Plants exhibit continuous growth and differentiation throughout their lives, unlike animals with set body plans.</p>
+                </div>
+                
+                <div class="step pop" data-step="2">
+                    <h4>Organ Formation</h4>
+                    <p>New organs (leaves, flowers, branches) can form at any stage of the plant's life cycle.</p>
+                </div>
+                
+                <div class="step pop" data-step="3">
+                    <h4>Adaptation</h4>
+                    <p>This flexibility allows plants to adapt their structure based on environmental conditions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Modern Solutions</h2>
+            <p>Breeding programs now work to create disease-resistant varieties and hybrids, combining the benefits of both reproductive methods while minimizing risks.</p>
+        </div>
+
+        <div class="legend">
+            <span><span class="dot green"></span> Asexual Reproduction</span>
+            <span><span class="dot red"></span> Sexual Reproduction</span>
+        </div>
+
+        <div class="footer">
+            <div class="sources">
+                Educational content about plant biology, reproduction strategies, and agricultural practices
+            </div>
+        </div>
+    </div>
+</body>
+</html>
